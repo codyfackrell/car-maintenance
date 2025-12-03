@@ -1,8 +1,21 @@
 export const getMaintenanceLog = async (req, res) => {
-    const { data, error } = await supabase
-    .from('maintenance_log')
-    .select()
+    const userId = req.params.id
+
+    try {
+        const { data, error } = await supabase
+        .from('maintenance_log')
+        .select()
+        .eq('id', userId);
+
+        if (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    return res.status(200).json(data);
+    } catch (err) {
+        return res.status(500).json({ error: 'Server error' });
+    }
 }
+
 
 
 export const addMaintenanceItem = async (req, res) => {
