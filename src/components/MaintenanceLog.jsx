@@ -7,8 +7,8 @@ function MaintenanceLog() {
         <th>Mileage</th>
         <th>Notes</th>
       </tr>
-    <table/>
-  );
+    </table>
+  )
 }
 
 export default MaintenanceLog;
