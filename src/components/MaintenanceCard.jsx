@@ -1,4 +1,4 @@
-function Format() {
+function MaintenanceCard() {
   return (
     <>
       <h1>Choose your format, based on:</h1>
@@ -10,4 +10,4 @@ function Format() {
   );
 }
 
-export default Format;
+export default MaintenanceCard;
