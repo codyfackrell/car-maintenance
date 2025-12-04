@@ -1,12 +1,11 @@
 function MaintenanceCard() {
   return (
-    <>
-      <h1>Choose your format, based on:</h1>
-      <button>Month</button>
-      <button>Mileage</button>
-      <button>Hybrid</button>
-      <button>Create your own!</button>
-    </>
+    <tr>
+      <td>{maintenanceItems.serviceDate}</td>
+      <td>{maintenanceItems.service}</td>
+      <td>{maintenanceItems.mileage}</td>
+      <td>{maintenanceItems.notes}</td>
+    </tr>
   );
 }
 
