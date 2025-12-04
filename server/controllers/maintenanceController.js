@@ -60,12 +60,12 @@ export const editMaintenanceItem = async (req, res) => {
 }
 
 export const deleteMaintenanceItem = async (req, res) => {
-    const deleteItem = req.body;
+    const {id} = req.body;
     try {
     const { data, error } = await supabase
     .from('maintenance_log')
-    .delete(deleteItem)
-    .eq('id', req.params.itemId)
+    .delete()
+    .eq('id', id)
     .select()
     .eq('id', userId);
 
