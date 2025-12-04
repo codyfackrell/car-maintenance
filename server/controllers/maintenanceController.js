@@ -1,3 +1,5 @@
+import supabase from '../config/db.js';
+
 export const getMaintenanceLog = async (req, res) => {
     const userId = req.params.id
 
@@ -12,18 +14,20 @@ export const getMaintenanceLog = async (req, res) => {
         }
     return res.status(200).json(data);
     } catch (err) {
-        return res.status(500).json({ error: 'Server error' });
+        return res.status(500).json({ err: 'Server error' });
     }
 }
 
-
-
 export const addMaintenanceItem = async (req, res) => {
-    // add item and returns the item
+    const { serviceDate, serviceItem, mileage, notes } = req.body;
+    try {
     const { data, error } = await supabase
     .from('maintenance_log')
-    .insert({ })
+    .insert({ date_of_service: serviceDate, service_item: serviceItem, mileage, notes })
     .select()
+    } catch (err) {
+        return res.status(500).json({err: 'Server error'});
+    }
 }
 
 export const editMaintenanceItem = async (req, res) => {
