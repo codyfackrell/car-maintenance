@@ -1,17 +1,38 @@
+import {useState} from 'react';
+import {useFormStatus} from 'react-router-dom';
+
+
 function Login() {
+  const {pending} = useFormStatus();
+  cont [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const body = { username, password}
+
+    axios.post('/login', body).then((res) => {
+      // Handle successful login
+    }
+  )
+  } 
+
   return (
     <>
       <form>
         <label htmlFor="username">
           Username:
-          <input type="text" id="username" required />
+          <input type="text" id="username" required onChange={(e) => setUsername(e.target.value)} />
         </label>
 
         <label htmlFor="password">
           Password:
-          <input type="password" id="password" required />
+          <input type="password" id="password" required onChange={(e) => setPassword(e.target.value)}/>
         </label>
-        <button>Login</button>
+        <button type='submit' disabled={pending}
+        
+        >{pending ? "Submitting...": "Login"}</button>
       </form>
       <p>
         Not a member? <a href="/signup">Sign up</a>
