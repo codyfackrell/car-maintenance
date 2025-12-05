@@ -1,4 +1,4 @@
-function MaintenanceCard() {
+function MaintenanceCard({ maintenanceItems }) {
   return (
     <tr>
       <td>{maintenanceItems.serviceDate}</td>
