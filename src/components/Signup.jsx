@@ -1,8 +1,26 @@
+import { useState } from "react";
+import axios from "axios";
+
 function Signup() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const body = { firstName, lastName, username, password };
+
+    axios.post("/signup", body).then((res) => {
+      //handle signup
+    });
+  }
+
   return (
     <>
-      <form>
-        <h1>Sign up!</h1>
+      <h1>Sign up</h1>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="first-name">
           First Name:
           <input type="text" id="first-name" required />
