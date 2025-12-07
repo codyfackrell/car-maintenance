@@ -1,4 +1,8 @@
-import "./css/App.css";
+import "./styles/index.css";
+import "./styles/App.css";
+import "./styles/Auth.css";
+import "./styles/Maintenance.css";
+import "./styles/Home.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";

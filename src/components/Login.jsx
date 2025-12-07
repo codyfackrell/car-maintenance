@@ -18,11 +18,11 @@ function Login() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <h1>Log in</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">
-          Username:
+          Username
           <input
             type="text"
             id="username"
@@ -32,7 +32,7 @@ function Login() {
         </label>
 
         <label htmlFor="password">
-          Password:
+          Password
           <input
             type="password"
             id="password"
@@ -47,7 +47,7 @@ function Login() {
       <p>
         Not a member? <a href="/signup">Sign up</a>
       </p>
-    </>
+    </div>
   );
 }
 

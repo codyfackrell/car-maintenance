@@ -1,0 +1,121 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background: #0366d6;
+  color: white;
+}
+
+thead th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+tbody tr:nth-child(even) {
+  background: #f3f7ff;
+}
+
+tbody td {
+  padding: 0.9rem;
+  border-bottom: 1px solid #eaeaea;
+  vertical-align: top;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ===== ACTION COLUMN ===== */
+.actions-header,
+.actions {
+  text-align: center;
+  width: 100px;
+}
+
+/* icons inside cells */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ADD icon (header) */
+.add-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.add-icon:hover {
+  transform: scale(1.1);
+}
+
+/* EDIT icon */
+.edit-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #3276c3;
+  transition: 0.15s ease;
+}
+
+.edit-icon:hover {
+  color: #235a96;
+  transform: scale(1.1);
+}
+
+/* DELETE icon */
+.delete-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #d9534f;
+  transition: 0.15s ease;
+}
+
+.delete-icon:hover {
+  color: #b52b27;
+  transform: scale(1.12);
+}
+
+/* Responsive table */
+@media (max-width: 650px) {
+  table,
+  thead {
+    display: none;
+  }
+
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    background: white;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  td {
+    padding: 0.5rem 0;
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+}

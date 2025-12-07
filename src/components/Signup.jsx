@@ -18,26 +18,26 @@ function Signup() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <h1>Sign up</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="first-name">
-          First Name:
+          First Name
           <input type="text" id="first-name" required />
         </label>
 
         <label htmlFor="last-name">
-          Last Name:
+          Last Name
           <input type="text" id="last-name" required />
         </label>
 
         <label htmlFor="username">
-          Username:
+          Username
           <input type="text" id="username" required />
         </label>
 
         <label htmlFor="password">
-          Password:
+          Password
           <input type="password" id="password" required />
         </label>
         <button>Sign Up</button>
@@ -45,7 +45,7 @@ function Signup() {
       <p>
         Already a member? <a href="/login">Login!</a>
       </p>
-    </>
+    </div>
   );
 }
 
