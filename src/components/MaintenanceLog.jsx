@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { IoAddSharp } from "react-icons/io5";
 import axios from "axios";
 import MaintenanceCard from "./MaintenanceCard";
@@ -43,7 +44,9 @@ function MaintenanceLog() {
           <th>Mileage</th>
           <th>Notes</th>
           <th className="actions-header">
-            <IoAddSharp className="add-icon" />
+            <Link to="/add-maintenance">
+              <IoAddSharp className="add-icon" />
+            </Link>
           </th>
         </tr>
       </thead>
