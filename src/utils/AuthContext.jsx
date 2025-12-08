@@ -1,7 +1,17 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
 import axios from "./axiosInstance";
 
 const AuthContext = createContext();
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -14,12 +24,12 @@ export function AuthProvider({ children }) {
     setError(null);
 
     try {
-      const res = await axios.get("/me");
+      const res = await axios.get("/auth/me");
       setUser(res.data?.user ?? null);
     } catch (err) {
       setUser(null);
     } finally {
-      setUser(null);
+      setLoading(false);
     }
   }, []);
 
@@ -27,12 +37,34 @@ export function AuthProvider({ children }) {
     fetchUser();
   }, [fetchUser]);
 
+  const register = async (firstName, lastName, username, password) => {
+    setAuthLoading(true);
+    setError(null);
+
+    try {
+      await axios.post("/auth/register", {
+        firstName,
+        lastName,
+        username,
+        password,
+      });
+      return { success: true };
+    } catch (err) {
+      const message =
+        err?.response?.data?.error || err?.response?.data || err.message;
+      setError(message);
+      return { success: false, error: message };
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
   const login = async (username, password) => {
     setAuthLoading(true);
     setError(null);
 
     try {
-      await axios.post("/login", { username, password });
+      await axios.post("/auth/login", { username, password });
       await fetchUser();
 
       return { success: true };
@@ -50,7 +82,7 @@ export function AuthProvider({ children }) {
     setAuthLoading(true);
     setError(null);
     try {
-      await axios.post("/logout");
+      await axios.post("/auth/logout");
       setUser(null);
       return { success: true };
     } catch (err) {
@@ -68,12 +100,12 @@ export function AuthProvider({ children }) {
     loading,
     authLoading,
     error,
+    register,
     login,
     logout,
     fetchUser,
     isAuthenticated: !!user,
   };
 
-  return;
-  <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

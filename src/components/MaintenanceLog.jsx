@@ -36,27 +36,33 @@ function MaintenanceLog() {
   }, []);
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Date of Service</th>
-          <th>Service</th>
-          <th>Mileage</th>
-          <th>Notes</th>
-          <th className="actions-header">
-            <Link to="/add-maintenance">
-              <IoAddSharp className="add-icon" />
-            </Link>
-          </th>
-        </tr>
-      </thead>
+    <div>
+      <nav>
+        <h1>Car Maintenance</h1>
+        <a>Logout</a>
+      </nav>
+      <table>
+        <thead>
+          <tr>
+            <th>Date of Service</th>
+            <th>Service</th>
+            <th>Mileage</th>
+            <th>Notes</th>
+            <th className="actions-header">
+              <Link to="/add-maintenance">
+                <IoAddSharp className="add-icon" />
+              </Link>
+            </th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {usersMaintenanceItems.map((item) => (
-          <MaintenanceCard key={item.id} maintenanceItems={item} />
-        ))}
-      </tbody>
-    </table>
+        <tbody>
+          {usersMaintenanceItems.map((item) => (
+            <MaintenanceCard key={item.id} maintenanceItems={item} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

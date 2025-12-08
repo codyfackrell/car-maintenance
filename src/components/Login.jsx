@@ -1,21 +1,37 @@
-import { useState } from "react";
-import { useFormStatus } from "react-dom";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/AuthContext.jsx";
 
 function Login() {
-  const { pending } = useFormStatus();
+  const { authLoading, error, isAuthenticated, login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [localError, setLocalError] = useState("");
+  const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/log", { replace: true });
+    }
+  }, [isAuthenticated]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLocalError(null);
 
-    const body = { username, password };
+    if (!username || !password) {
+      setLocalError("Both username and password are required.");
+      return;
+    }
 
-    axios.post("/login", body).then((res) => {
-      // Handle successful login
-    });
-  }
+    const result = await login(username, password);
+
+    if (result.success) {
+      navigate("/log", { replace: true });
+    } else {
+      setLocalError(result.error || "Login failed");
+    }
+  };
 
   return (
     <div className="form-container">
@@ -27,6 +43,7 @@ function Login() {
             type="text"
             id="username"
             required
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
@@ -37,12 +54,17 @@ function Login() {
             type="password"
             id="password"
             required
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <button type="submit" disabled={pending}>
-          {pending ? "Submitting..." : "Login"}
+        <button type="submit" disabled={authLoading}>
+          {authLoading ? "Logging in..." : "Login"}
         </button>
+
+        {(localError || error) && (
+          <p className="error">{localError || error}</p>
+        )}
       </form>
       <p>
         Not a member? <a href="/signup">Sign up</a>
